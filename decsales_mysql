@@ -1,25 +1,5 @@
-SELECT COUNT(*)
-FROM decsales
+DATA SOURCE: https://onyxdata.ck.page/datadna-challenge-december-2023
 
-SELECT *
-FROM decsales
-
-SELECT gender, SUM(unitprice)
-FROM decsales
-GROUP BY gender
-ORDER BY SUM(unitprice) DESC
-
-SELECT DISTINCT Gender
-FROM decsales
-
-select *
-FROM test_table`christmas sales and trends - december 2023`ï»¿TransactionIDï»¿TransactionID
-
-SELECT *
-FROM decsales
-
-ALTER TABLE decsales
-RENAME COLUMN `ï»¿TransactionID` TO TransactionID
 
 --1 how many women purchased electronics?
 SELECT Gender, 
@@ -27,6 +7,7 @@ Category,
 COUNT(*)
 FROM decsales
 WHERE Gender = 'Female' AND Category = 'Electronics'
+
 
 --2 total sales from purcahses by men of age 20-30 buying toys
 SELECT Gender, 
@@ -37,6 +18,7 @@ WHERE gender = 'Male'
 	AND (age BETWEEN 20 AND 30)
 GROUP BY gender
 
+
 --3 how many men of age 40-60 purchased toys
 SELECT DISTINCT COUNT(CustomerID) AS MenCount
 FROM decsales
@@ -44,6 +26,7 @@ WHERE gender = 'Male'
 	AND category = 'Toys' 
 	AND (age BETWEEN 40 AND 60)
 GROUP BY gender
+
 
 --4 give the breakdown of age range of men and women who purchased toys in christmas market
 --get maximum and minimum age, group into age range
@@ -79,6 +62,7 @@ WHERE Category = 'Toys' AND Event = 'Christmas Market'
 GROUP BY AgeGroup, Gender
 ORDER BY AgeGroup ASC, BuyerCount DESC
 
+
 --5 which gender bought the most per category, and how many? get only the top rank MAX()
 SELECT 
 	category,
@@ -111,10 +95,12 @@ from
     where paymenttype = 'Debit Card'
 ) as totalreturn
 
+
 --7 which month had the highest and lowest sales?
 group by month
 count total sales or highest product price total
 rank
+
 
 --8 rolling average? running total adding past one or two previous months and anohter column for present month sales
 WITH 
@@ -125,6 +111,7 @@ FROM curr_month a
 JOIN total b ON a.transactionid = b.transactionid
 GROUP BY yrmo
 
+
 --9 per year cumulative total sales
 SELECT YEAR(date), 
        ROUND((SUM(totalprice)),2),
@@ -134,18 +121,4 @@ SELECT YEAR(date),
 FROM decsales a GROUP BY YEAR(date)
 ORDER BY YEAR(date);
 
-create new column
-use date from old date column and then string 
-
-UPDATE decsales
-JOIN newdate ON decsales.TransactionID = newdate.TransactionID -- Replace 'id' with the column that relates the two tables
-SET decsales.date = newdate.date;
-
---per age range, which gender bought the most and how many? get only the top row
---how many unique products are being bought (regardless of quantity)? which category has the higest and lowest unique
---what payment method is preferred by women that buy during snowy weather?
---second higest
---last 5 rows
---create pivot
---use lag, lead, max, min
 
